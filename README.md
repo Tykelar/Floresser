@@ -1,6 +1,7 @@
-# Welcome to FloresserSaldo app 👋
+# Welcome to Floresser app 👋
 
 Check https://docs.expo.dev for Expo documentation
+
 Expo Version 51.0.4
 
 2. Start the app

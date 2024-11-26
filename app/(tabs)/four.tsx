@@ -11,12 +11,17 @@ export default function ListaUsuarios() {
   }, []);
 
   const fetchUsuarios = async () => {
-    const data = await getDocs(collection(db, 'usuarios'));
-    setUsuarios(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    try {
+      const data = await getDocs(collection(db, 'usuarios'));
+      setUsuarios(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    } catch (error) {
+      console.error("Erro ao buscar usuários:", error);
+    }
   };
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Lista de Usuários</Text>
       <FlatList
         data={usuarios}
         renderItem={({ item }) => (
@@ -28,12 +33,20 @@ export default function ListaUsuarios() {
         )}
         keyExtractor={(item) => item.id}
       />
+
+      
+
+      <TouchableOpacity style={styles.button} onPress={fetchUsuarios}>
+        <Text style={styles.buttonText}>Atualizar Lista</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
   usuarioBox: {
     backgroundColor: '#f9f9f9',
     padding: 15,
