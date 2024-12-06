@@ -25,6 +25,7 @@ export default function TabLayout() {
         // to prevent a hydration error in React Navigation v6.
         headerShown: false,
       }}>
+
       <Tabs.Screen
         name="index"
         options={{
@@ -59,6 +60,14 @@ export default function TabLayout() {
         name="three"
         options={{
           title: 'Add User',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+       }}
+      />
+
+<Tabs.Screen
+        name="twov2"
+        options={{
+          title: 'search improved',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
        }}
       />
