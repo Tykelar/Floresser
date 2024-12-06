@@ -11,9 +11,9 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Out</Text>
+      <Text style={styles.title}>Sair da Conta</Text>
       <TouchableOpacity style={styles.button} onPress={() => auth.signOut()}>
-        <Text style={styles.text}>Sign Out</Text>
+        <Text style={styles.text}>Sair</Text>
       </TouchableOpacity>
     </View>
   );

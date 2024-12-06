@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, Text, View } from 'react-native';
 import { db } from '../../FirebaseConfig';
-import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection, query, where, getDocs, updateDoc, doc, addDoc } from 'firebase/firestore';
 
 export default function EditarSaldo() {
   const [nif, setNif] = useState('');
   const [usuario, setUsuario] = useState<any>(null);
   const [saldoAlteracao, setSaldoAlteracao] = useState('');
+  const [justificacao, setJustificacao] = useState('');
 
   const buscarUsuario = async () => {
     const q = query(collection(db, 'usuarios'), where('nif', '==', nif));
@@ -19,29 +20,46 @@ export default function EditarSaldo() {
     }
   };
 
+  const registarTransacao = async (usuarioId: string, valorAlteracao: number, saldoAnterior: number, saldoFinal: number, justificacao: string) => {
+    await addDoc(collection(db, 'transacoes'), {
+      usuarioId,
+      valorAlteracao,
+      saldoAnterior,
+      saldoFinal,
+      justificacao,
+      data: new Date().toISOString(),
+    });
+  };
+
   const atualizarSaldo = async () => {
-    if (usuario && !isNaN(Number(saldoAlteracao))) {
-      const novoSaldo = usuario.saldo + parseFloat(saldoAlteracao);
+    if (usuario && !isNaN(Number(saldoAlteracao)) && justificacao.trim() !== '') {
+      const valorAlteracao = parseFloat(saldoAlteracao);
+      const novoSaldo = usuario.saldo + valorAlteracao;
+
       await updateDoc(doc(db, 'usuarios', usuario.id), { saldo: novoSaldo });
+
+      await registarTransacao(usuario.id, valorAlteracao, usuario.saldo, novoSaldo, justificacao);
+
       setUsuario({ ...usuario, saldo: novoSaldo });
       setSaldoAlteracao('');
+      setJustificacao('');
     } else {
-      console.log('Saldo inválido.');
+      console.log('Saldo inválido ou justificativa ausente.');
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Buscar e Editar Saldo</Text>
+      <Text style={styles.title}>Editar Saldo</Text>
       <TextInput
-        placeholder="Buscar por NIF"
+        placeholder="Procurar por NIF"
         value={nif}
         onChangeText={setNif}
         style={styles.input}
         keyboardType="numeric"
       />
       <TouchableOpacity style={styles.button} onPress={buscarUsuario}>
-        <Text style={styles.buttonText}>Buscar Usuário</Text>
+        <Text style={styles.buttonText}>Procurar Usuário</Text>
       </TouchableOpacity>
       {usuario && (
         <View style={styles.usuarioContainer}>
@@ -53,6 +71,12 @@ export default function EditarSaldo() {
             onChangeText={setSaldoAlteracao}
             style={styles.input}
             keyboardType="numeric"
+          />
+          <TextInput
+            placeholder="Justificação para a alteração"
+            value={justificacao}
+            onChangeText={setJustificacao}
+            style={styles.input}
           />
           <TouchableOpacity style={styles.button} onPress={atualizarSaldo}>
             <Text style={styles.buttonText}>Atualizar Saldo</Text>

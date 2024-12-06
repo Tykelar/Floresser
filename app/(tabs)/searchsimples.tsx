@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, Text, View } from 'react-native';
 import { db } from '../../FirebaseConfig';
-import { collection, query, where, getDocs, updateDoc, doc, addDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
 
 export default function EditarSaldo() {
   const [nif, setNif] = useState('');
@@ -19,25 +19,10 @@ export default function EditarSaldo() {
     }
   };
 
-  const registarTransacao = async (usuarioId: string, valorAlteracao: number, saldoAnterior: number, saldoFinal: number) => {
-    await addDoc(collection(db, 'transacoes'), {
-      usuarioId,
-      valorAlteracao,
-      saldoAnterior,
-      saldoFinal,
-      data: new Date().toISOString(),
-    });
-  };
-
   const atualizarSaldo = async () => {
     if (usuario && !isNaN(Number(saldoAlteracao))) {
-      const valorAlteracao = parseFloat(saldoAlteracao);
-      const novoSaldo = usuario.saldo + valorAlteracao;
-
+      const novoSaldo = usuario.saldo + parseFloat(saldoAlteracao);
       await updateDoc(doc(db, 'usuarios', usuario.id), { saldo: novoSaldo });
-
-      await registarTransacao(usuario.id, valorAlteracao, usuario.saldo, novoSaldo);
-
       setUsuario({ ...usuario, saldo: novoSaldo });
       setSaldoAlteracao('');
     } else {
@@ -87,3 +72,5 @@ const styles = StyleSheet.create({
   usuarioContainer: { marginTop: 20, width: '80%', alignItems: 'center' },
   label: { fontSize: 16, marginBottom: 10 },
 });
+
+*/

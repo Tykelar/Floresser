@@ -1,17 +1,13 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['name']; color: string }) {
+  return <FontAwesome size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -21,65 +17,73 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
+        tabBarInactiveTintColor: '#A9A9A9',
+        tabBarStyle: {
+          backgroundColor: Colors[colorScheme ?? 'light'].background,
+          borderTopWidth: 0,
+          height: 60,
+          paddingBottom: 5,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+        },
         headerShown: false,
-      }}>
-
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Sign Out',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Sair',
+          tabBarIcon: ({ color }) => <TabBarIcon name="sign-out" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
+              <Pressable style={({ pressed }) => [styles.headerButton, pressed && { opacity: 0.5 }]}>
+                <FontAwesome
+                  name="info-circle"
+                  size={25}
+                  color={Colors[colorScheme ?? 'light'].text}
+                />
               </Pressable>
             </Link>
           ),
         }}
       />
-
       <Tabs.Screen
-        name="two"
+        name="search"
         options={{
-          title: 'Search',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Editar Saldo',
+          tabBarIcon: ({ color }) => <TabBarIcon name="edit" color={color} />,
         }}
       />
-
       <Tabs.Screen
-        name="three"
+        name="createuser"
         options={{
-          title: 'Add User',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-       }}
+          title: 'Novo Utilizador',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user-plus" color={color} />,
+        }}
       />
-
-<Tabs.Screen
-        name="twov2"
-        options={{
-          title: 'search improved',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-       }}
-      />
-
       <Tabs.Screen
-        name="four"
+        name="userlist"
         options={{
-          title: 'User List',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-       }}
+          title: 'Lista Utilizadores',
+          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+        }}
       />
-
+      <Tabs.Screen
+        name="transacoes"
+        options={{
+          title: 'Histórico',
+          tabBarIcon: ({ color }) => <TabBarIcon name="history" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  headerButton: {
+    marginRight: 15,
+    padding: 8,
+  },
+});
