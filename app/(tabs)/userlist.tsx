@@ -23,7 +23,7 @@ export default function ListaUsuarios() {
     try {
       await deleteDoc(doc(db, 'usuarios', usuarioId));
       Alert.alert("Sucesso", "Usuário deletado com sucesso.");
-      fetchUsuarios(); // Atualiza a lista após deletar
+      fetchUsuarios(); // Atualiza a lista após apagar
     } catch (error) {
       console.error("Erro ao deletar usuário:", error);
       Alert.alert("Erro", "Ocorreu um erro ao tentar deletar o usuário.");
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
-    flexDirection: 'row', // Alinha o texto e botão na mesma linha
+    flexDirection: 'row', // Alinha o texto e o botão na mesma linha
     justifyContent: 'space-between',
     alignItems: 'center',
   },

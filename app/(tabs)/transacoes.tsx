@@ -56,7 +56,7 @@ export default function EditarSaldo() {
                   <Text style={styles.transacaoText}>Valor: {item.valorAlteracao.toFixed(2)}</Text>
                   <Text style={styles.transacaoText}>Saldo Anterior: {item.saldoAnterior.toFixed(2)}</Text>
                   <Text style={styles.transacaoText}>Saldo Final: {item.saldoFinal.toFixed(2)}</Text>
-                  <Text style={styles.transacaoText}>Justificativo: {item.justificacao}</Text>
+                  <Text style={styles.transacaoText}>Descritivo: {item.justificacao}</Text>
                   <Text style={styles.transacaoText}>Data: {new Date(item.data).toLocaleString()}</Text>
                 </View>
               )}

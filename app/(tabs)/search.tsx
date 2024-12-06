@@ -73,7 +73,7 @@ export default function EditarSaldo() {
             keyboardType="numeric"
           />
           <TextInput
-            placeholder="Justificação para a alteração"
+            placeholder="Descritivo"
             value={justificacao}
             onChangeText={setJustificacao}
             style={styles.input}
