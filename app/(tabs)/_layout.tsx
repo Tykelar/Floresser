@@ -30,24 +30,17 @@ export default function TabLayout() {
         headerShown: false,
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Sair',
-          tabBarIcon: ({ color }) => <TabBarIcon name="sign-out" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable style={({ pressed }) => [styles.headerButton, pressed && { opacity: 0.5 }]}>
-                <FontAwesome
-                  name="info-circle"
-                  size={25}
-                  color={Colors[colorScheme ?? 'light'].text}
-                />
-              </Pressable>
-            </Link>
+      <Tabs.Screen name="index" options={{title: 'Sair', tabBarIcon: ({ color }) => <TabBarIcon name="sign-out" color={color} />, 
+        headerRight: () => ( 
+          <Link href="/modal" asChild>
+            <Pressable style={({ pressed }) => [styles.headerButton, pressed && { opacity: 0.5 }]}>
+                <FontAwesome name="info-circle" size={25} color={Colors[colorScheme ?? 'light'].text} />
+             </Pressable>
+           </Link>
           ),
         }}
       />
+
       <Tabs.Screen
         name="search"
         options={{
