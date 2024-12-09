@@ -21,15 +21,9 @@ export default function CriarUsuario() {
   return (
     <View style={styles.container}>
       <TextInput placeholder="Nome" value={nome} onChangeText={setNome} style={styles.input} />
-      <TextInput
-        placeholder="NIF (9 dígitos)"
-        value={nif}
-        onChangeText={setNif}
-        keyboardType="numeric"
-        style={styles.input}
-      />
+      <TextInput placeholder="NIF (9 dígitos)" value={nif} onChangeText={setNif} keyboardType="numeric" style={styles.input} />
       <TouchableOpacity style={styles.button} onPress={criarUsuario}>
-        <Text style={styles.buttonText}>Criar Usuário</Text>
+      <Text style={styles.buttonText}>Criar Usuário</Text>
       </TouchableOpacity>
     </View>
   );

@@ -2,19 +2,37 @@ import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { auth } from '../../FirebaseConfig';
 import { router } from 'expo-router';
 import { getAuth } from 'firebase/auth';
+import { useEffect } from 'react';
+
 
 export default function TabOneScreen() {
+  useEffect(() => {
+    // Configura o listener apenas uma vez
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        router.replace('/'); // Redireciona apenas se não houver usuário
+      }
+    });
 
-  getAuth().onAuthStateChanged((user) => {
-    if (!user) router.replace('/');
-  });
+    // Cleanup: remove o listener ao desmontar
+    return () => unsubscribe();
+  }, []); // Dependência vazia garante execução única
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sair da Conta</Text>
-      <TouchableOpacity style={styles.button} onPress={() => auth.signOut()}>
-        <Text style={styles.text}>Sair</Text>
-      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={async () => {
+    try {
+      await auth.signOut(); // Realiza o logout
+      router.replace('/'); // Redireciona para a tela de login
+        } catch (error) {
+          console.error('Erro ao sair:', error);
+        }
+    } 
+    }>
+    <Text style={styles.text}>Sair</Text>
+    </TouchableOpacity>
+
     </View>
   );
 }

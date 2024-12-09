@@ -26,7 +26,7 @@ const index = () => {
       if (user) router.replace('/(tabs)');
     } catch (error: any) {
       console.log(error)
-      alert('Sign in failed: ' + error.message);
+      alert('Sign up failed: ' + error.message);
     }
   }
 
