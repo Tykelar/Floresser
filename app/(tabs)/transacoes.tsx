@@ -32,13 +32,7 @@ export default function EditarSaldo() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Histórico de Transações</Text>
-      <TextInput
-        placeholder="Procurar por NIF"
-        value={nif}
-        onChangeText={setNif}
-        style={styles.input}
-        keyboardType="numeric"
-      />
+      <TextInput placeholder="Procurar por NIF" value={nif} onChangeText={setNif} style={styles.input} keyboardType="numeric" />
       <TouchableOpacity style={styles.button} onPress={buscarUsuario}>
         <Text style={styles.buttonText}>Procurar</Text>
       </TouchableOpacity>

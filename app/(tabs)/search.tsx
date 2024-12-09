@@ -51,13 +51,7 @@ export default function EditarSaldo() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Editar Saldo</Text>
-      <TextInput
-        placeholder="Procurar por NIF"
-        value={nif}
-        onChangeText={setNif}
-        style={styles.input}
-        keyboardType="numeric"
-      />
+      <TextInput placeholder="Procurar por NIF" value={nif} onChangeText={setNif} style={styles.input} keyboardType="numeric" />
       <TouchableOpacity style={styles.button} onPress={buscarUsuario}>
         <Text style={styles.buttonText}>Procurar Usuário</Text>
       </TouchableOpacity>
@@ -65,19 +59,8 @@ export default function EditarSaldo() {
         <View style={styles.usuarioContainer}>
           <Text style={styles.label}>Nome: {usuario.nome}</Text>
           <Text style={styles.label}>Saldo Atual: {usuario.saldo.toFixed(2)}</Text>
-          <TextInput
-            placeholder="Adicionar/Remover Saldo"
-            value={saldoAlteracao}
-            onChangeText={setSaldoAlteracao}
-            style={styles.input}
-            keyboardType="numeric"
-          />
-          <TextInput
-            placeholder="Descritivo"
-            value={justificacao}
-            onChangeText={setJustificacao}
-            style={styles.input}
-          />
+          <TextInput placeholder="Adicionar/Remover Saldo" value={saldoAlteracao} onChangeText={setSaldoAlteracao} style={styles.input} keyboardType="numeric" />
+          <TextInput placeholder="Descritivo" value={justificacao} onChangeText={setJustificacao} style={styles.input} />
           <TouchableOpacity style={styles.button} onPress={atualizarSaldo}>
             <Text style={styles.buttonText}>Atualizar Saldo</Text>
           </TouchableOpacity>
