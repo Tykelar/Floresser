@@ -1,4 +1,4 @@
-# Welcome to Floresser app 👋
+# Welcome to Floresser Expo app 👋
 
 This application aims to provide users with a system that allows them to login and access their account from anywhere and create, view, and edit the balance of users of a service based on their Tax Identification Number (NIF). It also stores the transactions performed for each user, enabling the consultation of their transaction history.
 
