@@ -30,7 +30,7 @@ export default function TabLayout() {
         headerShown: false,
       }}
     >
-      <Tabs.Screen name="signout" options={{title: 'Sair', tabBarIcon: ({ color }) => <TabBarIcon name="sign-out" color={color} />, 
+      <Tabs.Screen name="index" options={{title: 'Sair', tabBarIcon: ({ color }) => <TabBarIcon name="sign-out" color={color} />, 
         headerRight: () => ( 
           <Link href="/modal" asChild>
             <Pressable style={({ pressed }) => [styles.headerButton, pressed && { opacity: 0.5 }]}>
@@ -42,10 +42,31 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="changevalues"
+        name="search"
         options={{
-          title: 'Alterar valores',
+          title: 'Editar Saldo',
           tabBarIcon: ({ color }) => <TabBarIcon name="edit" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="createuser"
+        options={{
+          title: 'Novo Utilizador',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user-plus" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="userlist"
+        options={{
+          title: 'Lista Utilizadores',
+          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="transacoes"
+        options={{
+          title: 'Histórico',
+          tabBarIcon: ({ color }) => <TabBarIcon name="history" color={color} />,
         }}
       />
     </Tabs>
